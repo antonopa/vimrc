@@ -1,0 +1,1 @@
+set tags=~/.java.tags
