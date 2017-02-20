@@ -156,3 +156,5 @@ autocmd FileType nerdtree setlocal relativenumber
 nnoremap <leader>hs :set hlsearch<CR>
 nnoremap <leader>hh :set nohlsearch<CR>
 
+" Close YCM preview window after we exit insert mode
+let g:ycm_autoclose_preview_window_after_insertion = 1
