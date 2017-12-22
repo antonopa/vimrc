@@ -9,7 +9,6 @@ Plugin 'VundleVim/Vundle.vim'
 Plugin 'bling/vim-airline'
 Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'ingmarlehmann/vim-franca-highlight'
-Plugin 'kergoth/vim-bitbake'
 Plugin 'mhinz/vim-startify'
 Plugin 'morhetz/gruvbox'
 Plugin 'scrooloose/nerdcommenter.git'
@@ -20,8 +19,12 @@ Plugin 'tpope/vim-unimpaired'
 Plugin 'Valloric/YouCompleteMe'
 Plugin 'vim-airline/vim-airline-themes'
 Plugin 'vim-scripts/indentpython.vim'
-"Plugin 'vim-scripts/minibufexpl.vim'
 Plugin 'vim-scripts/taglist.vim'
+Plugin 'scrooloose/vim-slumlord'
+Plugin 'aklt/plantuml-syntax'
+Plugin 'SirVer/ultisnips.git'
+Plugin 'Raimondi/delimitMate.git'
+Plugin 'leafgarland/typescript-vim.git'
 call vundle#end()
 filetype plugin indent on
 
@@ -80,15 +83,17 @@ while i <= 9
 endwhile
 
 nmap <silent> <leader>gt :NERDTreeToggle<CR>
-nmap <silent> <leader>O :qa!<CR>
+nmap <silent> <leader>q :qa!<CR>
 nnoremap <silent> <leader>ss :set scrollbind<CR>
 nnoremap <silent> <leader>sn :set noscrollbind<CR>
 
 let g:airline_theme='solarized'
+
 function! WindowNumber()
     let str=tabpagewinnr(tabpagenr())
     return str
 endfunction
+
 let g:airline_section_b='%t [:%{WindowNumber()}] -- %{airline#util#wrap(airline#extensions#branch#get_head(),0)}'
 let g:airline_section_c='%<%f[:%{WindowNumber()}]%m %#__accent_red#%{airline#util#wrap(airline#parts#readonly(),0)}%#__restore__#'
 
@@ -158,3 +163,41 @@ nnoremap <leader>hh :set nohlsearch<CR>
 
 " Close YCM preview window after we exit insert mode
 let g:ycm_autoclose_preview_window_after_insertion = 1
+
+" Copy to register
+nnoremap <leader>rw "ayw
+nnoremap <leader>rv "ay
+
+nnoremap <leader>rp "ap
+" Search register content
+nnoremap <leader>rs /<C-r>a
+nnoremap <leader>re /\<<C-r>a\>
+nnoremap <leader>rS /<C-r>a<CR>
+
+"nnoremap <leader>ur :w <bar> silent exec "! plantuml @% && eog '%:t:r'.png" <CR>
+map <F4> :e %:p:s,.h$,.X123X,:s,.cpp$,.h,:s,.X123X$,.cpp,<CR>
+
+
+let g:startify_files_number=5
+let g:startify_bookmarks = [ {'c': '~/.vimrc'}, '~/.zshrc' ]
+let g:startify_session_sort = 1
+let g:startify_list_order = [
+      \ ['   These are my sessions:'],
+      \ 'sessions',
+      \ ['   My most recently', '   used files'],
+      \ 'files',
+      \ ['   My most recently used files in the current directory:'],
+      \ 'dir',
+      \ ['   These are my bookmarks:'],
+      \ 'bookmarks',
+      \ ]
+
+nnoremap <leader>pp "+P
+nnoremap <leader>py "+yy
+vnoremap <leader>py "+y
+set showcmd
+
+set textwidth=100
+
+" Remove all whitespace
+nnoremap <leader>nw :g/[\t\ ]\+$/s///<CR>

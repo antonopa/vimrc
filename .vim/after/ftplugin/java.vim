@@ -4,4 +4,3 @@ setlocal shiftwidth=4
 
 set expandtab
 set autoindent
-set tags=~/.java.tags
